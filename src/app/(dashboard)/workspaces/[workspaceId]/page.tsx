@@ -1,7 +1,9 @@
+import { CreateWorkspaceForm } from "@/features/workspaces/components/create-workspace-form"
+
 const WorkspaceIdPage = () => {
     return (
         <div>
-            Workspace Id
+            Workspace id
         </div>
     )
 }
