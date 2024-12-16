@@ -1,20 +1,23 @@
+import { getCurrent } from "@/features/auth/queries";
+import { getWorkspaces } from "@/features/workspaces/queries";
+import { redirect } from "next/navigation";
 
-import { redirect } from "next/navigation"
+const HomePage = async () => {
+  const user = await getCurrent();
+  if (!user) redirect("/sign-in");
 
-import { getCurrent } from "@/features/auth/actions"
-import { getWorkspaces } from "@/features/workspaces/actions"
-
-export default async function Home() {
-  
-  const user = await getCurrent()
-
-  if (!user) redirect("/sign-in")
-  
-  const workspaces = await getWorkspaces()
+  const workspaces = await getWorkspaces();
   if (workspaces.total === 0) {
     redirect("/workspaces/create")
   } else {
-    redirect(`/workspaces/${workspaces.documents[0].$id}`)
+    redirect(`workspaces/${workspaces.documents[0].$id}`);
   }
 
-}
+  return (
+    <div>
+      HomePage
+    </div>
+  )
+};
+
+export default HomePage;
